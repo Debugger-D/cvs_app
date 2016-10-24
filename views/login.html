@@ -1,0 +1,69 @@
+<div ng-controller="loginCtrl" >
+    <!--[if lt IE 10]>
+    <p class="browserupgrade">您的 IE 浏览器版本太低. 快去 <a href="http://browsehappy.com/">升级你的浏览器</a> 来获得更好体验。</p>
+    <![endif]-->
+    <nav id="header" class="clearfix">
+        <div class="container">
+            <div class="logo">
+                <a href="#/">
+                    <img src="img/logoheader.png" class="logo-img">
+                </a>
+
+            </div>
+        </div>
+    </nav>
+
+    <div id="page" class="clearfix"><div style="height: 100%; width: 100%;"><div id="login-page">
+        <div id="login-form-col"><div style="height: 100%; width: 100%;"><img src="img/logo_login.png" id="login-logo">
+            <form class="form-horizontal" role="form" id="login-form">
+                <div class="form-group">
+                    <div class=" ">
+                        <!--<input type="text" class="form-control"  name="phone" required="">-->
+                        <input type="text" class="form-control"id="phone" placeholder="帐号"  ng-model="loginData.phone" ng-pattern="/^1[3|4|5|7|8][0-9]\d{4,8}$/" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class=" ">
+                        <!--<input type="password" class="form-control" name="password" required="">-->
+                        <input type="password" class="form-control" id="password" placeholder="密码" minlength="6" maxlength="20" ng-model="loginData.password" required>
+                    </div>
+                </div>
+                <button class="btn btn-danger" ng-show="loadfail" style="color: #fff;background-color: #d9534f;border-color: #d43f3a;">密码或用户名错误</button>
+                <div class="form-group">
+                    <div class="">
+                        <button class="btn" id="login" ng-click="login(loginData)">登录</button>
+                    </div>
+                </div>
+            </form>
+            <div id="login-bg">
+                <div class="b1"></div>
+                <div class="b2"></div>
+            </div>
+        </div></div>
+    </div>
+    </div></div>
+    <div id="ajax-loading-hint" style="display: none;">
+        <img src="img/g-dots.gif">
+    </div>
+
+    <div id="footer">
+        <div class="container">
+            <div class="clearfix">
+
+                <div class="col-9">
+
+                    <div class="footer-address">
+                        <p>浙ICP证：B2-20140272　浙ICP备：14022981号-10 　浙公网安备：33010802006313号 　地址：杭州市滨江区长河街道江虹路611号2幢3楼</p>
+                        <p>©TRC.COM　浙江小泰科技有限公司　版权所有</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer-icon" class="text-center">
+        <div class="container clearfix">
+            <img src="img/footer_icon.png">
+        </div>
+    </div>
+
+</div>

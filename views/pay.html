@@ -1,0 +1,129 @@
+<div>
+    <div class="newLogo">
+        <img src="img/payOnline.png" alt="">
+    </div>
+    <div class="newHeader" style="">
+        <span>订单金额：</span> <span class="newMoney" ng-bind="inSum"></span><span> 元</span>
+    </div>
+    <div class="newAll" ng-show="newAll">
+        <div class="newNav">
+            <span ng-click="payJye()" class="colorSpan">余额支付</span>
+            <span ng-click="payJali()">支付宝支付</span>
+            <span ng-click="payJweixin()">微信支付</span>
+            <span ng-click="payBank()">银行卡支付</span>
+        </div>
+        <div class="newMain">
+            <div ng-show="payBlock">
+                <div class="newPotline">
+                    <div class="newPadding">
+                        <br> <br><p>支付方式：&nbsp<span>余额支付</span></p><br>
+                        <p>账户余额:&nbsp&nbsp<span ng-bind="blance" class="newMoney" ></span> 元 </p><br>
+                        <p ng-show="openAccount">
+                            <span  class="newMoney1">还未开户：</span>
+                            <button class="btn btn-info" ng-click="openAccountForm=true">点我开户</button>
+                        </p>
+                        <br>
+                    </div>
+                </div>
+                <div class="" ng-show="openAccountForm" style="width: 450px">
+                    <form class="form-horizontal" role="form" name="form1">
+                        <div class="form-group">
+                            <label for="acountName" class="col-sm-2 control-label">账户名称</label>
+                            <div class="col-sm-10">
+                                <input  class="form-control" id="acountName" ng-model="openData.countName" placeholder="账户名称" maxlength="10" minlength="2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword300" class="col-sm-2 control-label">支付密码</label>
+                            <div class="col-sm-10">
+                                <input  class="form-control" id="inputPassword300" ng-model="openData.password" placeholder="支付密码" minlength="6">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default" ng-click="newAccount(openData)"   ng-disabled="form1.$invalid">确认绑定</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--<div>-->
+                    <!--点击点我开户出现两个输入框 http://devtest.pocketwallet.cn/documentAuto/#/1629/2236/2237-->
+                <!--</div>-->
+                <!--<div>开户成功后出现提醒开户成功</div>-->
+                <div class="newPadding" ng-show="passwordYe">
+                    <form action="" name="form">
+                        <br> <br><span>支付密码：</span>
+                        <input type="password" class="form-control newPassword" minlength="6" maxlength="20" ng-model="password" placeholder="请输入密码">
+                        <div ng-show="passwordError" class=" alert alert-danger alert-dismissible passwordError" role="alert">
+                            <div class="">
+                                <button ng-click="passwordError=false" type="button" class="close" data-dismiss="alert">
+                                    <span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                                </button>
+                                {{error_description}}
+                            </div>
+                        </div>
+                    </form>
+                    <br><br><button type="button" class="btn btn-success newButton"  ng-click="pay()"  ng-disabled="form.$invalid">确认支付</button>
+                </div>
+            </div>
+            <div id="weixin" ng-show="weixinBlock">
+                <img src={{codeUrl}}>
+                <p>扫码完成微信支付</p>
+            </div>
+            <div class="newPadding" ng-show="bankBlock" >
+                <div class="floatLeft">
+                    <br><br><br>
+                    <form class="">
+                        <div class="radio bankList" ng-repeat="item in selectList">
+                            <label>
+                                <input  ng-model="select" ng-change="bankChange(item.bankCardNo)" name="bankName" type="radio" value="{{item.bankName}}" />
+                                {{item.bankName}}   ****{{item.bankCardNo.slice(-4)}}
+                            </label>
+                        </div>
+                        <!--<input ng-repeat="item in selectList" name="bankName" type="radio" value="" />{{item.bankName}}-->
+                    </form>
+                    <div ng-show="bankError" class=" alert alert-danger alert-dismissible bankError" role="alert">
+                        <div class="">
+                            <button ng-click="bankError=false" type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                            </button>
+                            {{bankError}}
+                        </div>
+                    </div>
+                    <br><br><br><button class="btn btn-success newButton" ng-click="payBankGo()">确认支付</button>
+                    <br><button class="btn btn-info newButton" ng-click="canbankBind()" style="margin-top: 50px">绑定银行卡</button>
+                </div>
+                <div class="floatRight bankMargin" ng-show="bankBindBlock">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">卡号</label>
+                            <div class="col-sm-10">
+                                <input  class="form-control" id="inputEmail3" ng-model="bankData.cardNo" placeholder="银行卡号" maxlength="21" minlength="16">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-10">
+                                <input  class="form-control" id="inputPassword3" ng-model="bankData.userName" placeholder="姓名">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputIdcard" class="col-sm-2 control-label">身份证号</label>
+                            <div class="col-sm-10">
+                                <input  class="form-control" id="inputIdcard" ng-model="bankData.idCard" placeholder="身份证号" maxlength="18" minlength="18">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default" ng-click="bankBind(bankData)">确认绑定</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-success alertSize" role="alert" ng-show="newBack">已经完成支付 <br><span>页面即将跳转</span></div>
+    <div class="alert alert-danger alertSize" role="alert" ng-show="newBackerror">{{payerror_description}} <br><span>将返回商品页面</span></div>
+</div>
+<!--<button ng-click="openBank()">开户</button>-->

@@ -1,0 +1,66 @@
+<ul class="goods-list clearfix" style="margin-bottom: 100px">
+    <li class="goods-item" ng-repeat="item in goodsList">
+        <div class="goods-inner" ng-click="open(item)">
+            <div class="goods-img">
+                <a>
+                    <img ng-src="{{item.goodsUrl}}">
+                </a>
+            </div>
+            <div class="goods-inPrice text-sm" ng-bind="item.price|currency:'￥'"></div>
+        </div>
+        <div class="goods-info" ng-show="item.display" ng-click="plusNum(item)">
+            <i class="icon-close" ng-click="close($event,item)">x</i>
+            <div class="goods-num text-sup" ng-bind="item.goodsNum"></div>
+            <div class="goods-name text-center" ng-bind="item.goodsName"></div>
+            <div class="goods-outPrice flex" >
+                <div ng-bind="item.outPrice|currency:'￥'"></div>
+            </div>
+            <div class="goods-inPrice" ng-bind="item.price|currency:'￥'"></div>
+        </div>
+    </li>
+</ul>
+<div class="goods-action flex align-center">
+    <div class="goods-cart flex-none">
+        <i class="goods-num" ng-bind="orderData.num"></i>
+    </div>
+    <div class="goods-inSum text-sup" ng-bind="orderData.inSum|currency:'￥'">
+    </div>
+    <div class="goods-sum-inner">
+        <div class="inPrice flex" >
+            <div ng-bind="orderData.outSum|currency:'￥'"></div>
+        </div>
+        <div class="diffPrice">
+            公司补贴<span  ng-bind="orderData.diffPrice|currency:'￥'"></span>
+        </div>
+    </div>
+    <button class="btn-md" ng-click="placeOrder()">下单</button>
+</div>
+
+<!--<div class="pay-box" ng-show="payBlock">-->
+    <!--<div class="pay-type">-->
+        <!--<div class="title text-md">-->
+            <!--<a class="icon-back"></a>-->
+            <!--支付类型-->
+        <!--</div>-->
+        <!--<div class="type-list">-->
+            <!--<div class="type-item flex align-center">-->
+                <!--<div class="type-item-img">-->
+                    <!--<img class="flex-none" src="img/icon-alipay.png">-->
+                <!--</div>-->
+                <!--<p class="cell text-sm">支付宝</p>-->
+                <!--<i class="icon flex-none" ng-class="{'active':channel=='ALIPAY'}" ng-click="channel='ALIPAY'"></i>-->
+            <!--</div>-->
+            <!--<div class="type-item flex align-center">-->
+                <!--<div class="type-item-img">-->
+                    <!--<img class="flex-none" src="img/icon-weixinpay.png">-->
+                <!--</div>-->
+                <!--<p class="cell text-sm">微信支付</p>-->
+                <!--<i class="icon flex-none" ng-class="{'active':channel=='WEIXIN'}" ng-click="channel='WEIXIN'"></i>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="action">-->
+            <!--<button class="btn-md" ng-click="pay()">支付</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
